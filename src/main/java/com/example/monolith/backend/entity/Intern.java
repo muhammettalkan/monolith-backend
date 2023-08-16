@@ -10,7 +10,7 @@ public class Intern {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
     private String firstName;
     private String lastName;
     private String email;
@@ -19,18 +19,19 @@ public class Intern {
     public Intern() {
     }
 
-    public Intern(String firstName, String lastName, String email, String password) {
+    public Intern(int id, String firstName, String lastName, String email, String password) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

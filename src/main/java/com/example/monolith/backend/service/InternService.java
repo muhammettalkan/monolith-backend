@@ -16,23 +16,24 @@ public class InternService {
 
     public InternDto toDto(Intern intern){
         InternDto dto = new InternDto();
-        dto.setId(dto.getId());
-        dto.setFirstName(intern.getFirstName());
-        dto.setLastName(intern.getLastName());
-        dto.setEmail(intern.getEmail());
-        dto.setPassword(intern.getPassword());
+        dto.id = (intern.getId());
+        dto.firstName = (intern.getFirstName());
+        dto.lastName = (intern.getLastName());
+        dto.email = (intern.getEmail());
+        dto.password = (intern.getPassword());
         return dto;
     }
 
     public Intern fromDto(Intern intern, InternDto dto){
-        if (intern == null){
+        if (intern == null) {
             intern = new Intern();
         }
-        intern.setId(dto.getId());
-        intern.setFirstName(dto.getFirstName());
-        intern.setLastName(dto.getLastName());
-        intern.setEmail(dto.getEmail());
-        intern.setPassword(dto.getPassword());
+        intern.setId(dto.id);
+        intern.setFirstName(dto.firstName);
+        intern.setLastName(dto.lastName);
+        intern.setEmail(dto.email);
+        intern.setPassword(dto.password);
+        repository.save(intern);
         return intern;
     }
 
@@ -41,5 +42,13 @@ public class InternService {
         InternResponse response = new InternResponse();
         response.intern = toDto(intern);
         return response;
+    }
+
+    public String login(String email, String password) {
+        Intern intern = repository.findInternByEmail(email);
+        if(intern.getPassword() != password){
+            throw new RuntimeException("Email veya şifreniz hatalı");
+        }
+        return "Başarıyla giriş yapıldı";
     }
 }
