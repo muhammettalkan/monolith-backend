@@ -46,9 +46,9 @@ public class InternService {
 
     public String login(String email, String password) {
         Intern intern = repository.findInternByEmail(email);
-        if(intern.getPassword() != password){
-            throw new RuntimeException("Email veya şifreniz hatalı");
+        if(intern == null || !intern.getPassword().equals(password)){
+             return "Email or password mistake";
         }
-        return "Başarıyla giriş yapıldı";
+        return "Succesfully Log in";
     }
 }

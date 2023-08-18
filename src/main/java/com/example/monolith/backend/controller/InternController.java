@@ -1,5 +1,6 @@
 package com.example.monolith.backend.controller;
 
+import com.example.monolith.backend.request.LoginRequest;
 import com.example.monolith.backend.response.InternResponse;
 import com.example.monolith.backend.service.InternService;
 import com.example.monolith.backend.dto.InternDto;
@@ -15,10 +16,10 @@ public class InternController {
     }
 
 
-    @GetMapping("login")
-    public String login(@RequestParam String email,
-                                @RequestParam String password){
-        return service.login(email, password);
+    @PostMapping("login")
+    public String login(@RequestBody LoginRequest loginRequest){
+        service.login(loginRequest.getEmail(), loginRequest.getPassword());
+        return "Successfully logged in";
     }
 
     @PostMapping("/register")
